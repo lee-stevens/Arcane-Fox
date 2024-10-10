@@ -20,3 +20,16 @@
 ## Hosting
 
 [Heroku]
+
+## GOALS
+
+### Primary
+
+1. Replace Obsidian & Notion
+2. Store vast amounts of Notes
+3. Persisted on a per-user basis with Authentication
+4. Note navigation
+
+### Secondary / Optional
+
+1. Export to Markdown

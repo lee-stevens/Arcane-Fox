@@ -1,0 +1,28 @@
+#app-utilities__sidebar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .sidebar-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5em;
+    gap: 1em;
+    height: 50px;
+
+    &:hover {
+      background-color: #646cff;
+      cursor: pointer;
+    }
+
+    .sidebar-item__label {
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+
+    .sidebar-item__icon {
+      font-size: 1.5em;
+    }
+  }
+}

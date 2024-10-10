@@ -1,4 +1,27 @@
 {
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@Pages/*": ["src/pages/*"],
+      "@Components/*": ["src/components/*"],
+      "@Types/*": ["src/@types/*"],
+      "@Public/*": ["public/*"],
+      "@/*": ["./src/*", "./dist/*", ""]
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
