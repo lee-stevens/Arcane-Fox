@@ -1,4 +1,4 @@
-import '../App.css'
+import '../App.scss'
 import './DashboardComponent.css'
 
 //Conditional JSX via 'Function-based conditional rendering'

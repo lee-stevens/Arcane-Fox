@@ -1,5 +1,5 @@
-import './App.css'
-import './styles/common.css'
+import './App.scss'
+import './styles/common.scss'
 import DashboardComponent from './components/DashboardComponent'
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
