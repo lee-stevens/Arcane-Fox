@@ -2,6 +2,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   .sidebar-item {
     display: flex;
@@ -23,6 +24,10 @@
 
     .sidebar-item__icon {
       font-size: 1.5em;
+    }
+
+    a {
+      padding: 0px;
     }
   }
 }

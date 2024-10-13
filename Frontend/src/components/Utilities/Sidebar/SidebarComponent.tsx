@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { SidebarTab, SidebarTabName } from "../../../types/sidebar";
 import './SidebarComponent.scss';
-import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiInbox } from 'react-icons/hi';
+import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
 import React from "react";
 
 const sidebarTabs: SidebarTab[] = [
-  { name: '', icon: HiMenu, canToggleSidebar: true },
-  { name: 'Dashboard', icon: HiHome },
-  { name: 'Settings', icon: HiCog },
-  { name: 'Profile', icon: HiUser },
-  { name: 'Logout', icon: HiLogout },
-  { name: 'Github', icon: HiInbox, ref: 'https://github.com/lee-stevens' }
+  { name: '', icon: HiMenu, canToggleSidebar: true, position: 'top' },
+  { name: 'Dashboard', icon: HiHome, position: 'top' },
+  { name: 'Settings', icon: HiCog, position: 'top' },
+  { name: 'Profile', icon: HiUser, position: 'top' },
+  { name: 'Logout', icon: HiLogout, position: 'top' },
+  { name: 'Github', icon: HiLink, ref: 'https://github.com/lee-stevens', position: 'bottom' }
 ];
 
 export default function SidebarComponent(
@@ -30,21 +30,42 @@ export default function SidebarComponent(
     sidebarElementRecord[tab.name] = tab.ref ? SidebarItemWithAnchor(tab, showSidebar) : SidebarItemContent(tab, showSidebar);
   });
 
+  const topSidebarItems = sidebarTabs.filter(tab => tab.position === 'top');
+  const bottomSidebarItems = sidebarTabs.filter(tab => tab.position === 'bottom');
+  
   return (
     <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
-      { Object.values(sidebarElementRecord).map((tabElement: JSX.Element, index) => {
-        const canToggleSidebar = sidebarTabs[index].canToggleSidebar;
-        const tabName = sidebarTabs[index].name;
-        return (
-          <React.Fragment key={tabName}>
-            <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
-              {tabElement}
-            </div>
-          </React.Fragment>
-        )
-      })}
+      <div id="sidebar__top">
+        {topSidebarItems.map((tab: SidebarTab) => {
+          const tabElement = sidebarElementRecord[tab.name];
+          const canToggleSidebar = tab.canToggleSidebar;
+  
+          return (
+            <React.Fragment key={tab.name}>
+              <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
+                {tabElement}
+              </div>
+            </React.Fragment>
+          );
+        })}
+      </div>
+  
+      <div id="sidebar_bottom">
+        {bottomSidebarItems.map((tab: SidebarTab) => {
+          const tabElement = sidebarElementRecord[tab.name];
+          const canToggleSidebar = tab.canToggleSidebar;
+  
+          return (
+            <React.Fragment key={tab.name}>
+              <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
+                {tabElement}
+              </div>
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
-  )
+  );
 }
 
 function SidebarItemContent(sidebarTab: SidebarTab, showSidebar: boolean): JSX.Element {
