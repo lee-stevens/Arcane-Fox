@@ -18,7 +18,19 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@Components/*": ["src/components/*"],
+      "@Types/*": ["src/types/*"],
+      "@Const/*": ["src/const/*"],
+      "@Services/*": ["src/services/*"],
+      "@Styles/*": ["src/styles/*"],
+      "@Assets/*": ["src/assets/*"],
+      "@Public/*": ["public/*"]
+    }    
   },
   "include": ["src"]
 }

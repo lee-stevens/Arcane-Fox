@@ -1,4 +1,4 @@
-import { IMarkdownDocument } from "../types/markdown";
+import { IMarkdownDocument } from "@Types/markdown";
 
 export const MARKDOWN_DOCUMENTS_HARDCODED: IMarkdownDocument[] = [
   {

@@ -3,7 +3,7 @@ import './SidebarComponent.scss';
 import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
 import React from "react";
 import { Link } from "react-router-dom";
-import { SidebarItem, SidebarItemName } from "@/types/utilities";
+import { SidebarItem, SidebarItemName } from "@Types/utilities";
 
 const sidebarTabs: SidebarItem[] = [
   { name: '', icon: HiMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },

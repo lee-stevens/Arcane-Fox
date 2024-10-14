@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './MarkdownExplorerComponent.scss';
-import { MARKDOWN_DOCUMENTS_HARDCODED } from "../../../../const/markdown";
-import { IMarkdownDocument } from "../../../../types/markdown";
+import { MARKDOWN_DOCUMENTS_HARDCODED } from "@Const/markdown";
+import { IMarkdownDocument } from "@Types/markdown";
 
 export default function MarkdownExplorerComponent() {
   const documents = GetMarkdownDocuments();
