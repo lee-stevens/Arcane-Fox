@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { SidebarItem, SidebarItemName } from "../../../types/sidebar";
 import './SidebarComponent.scss';
 import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
 import React from "react";
 import { Link } from "react-router-dom";
+import { SidebarItem, SidebarItemName } from "@/types/utilities";
 
 const sidebarTabs: SidebarItem[] = [
   { name: '', icon: HiMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },
@@ -15,15 +15,12 @@ const sidebarTabs: SidebarItem[] = [
   { name: 'Github', icon: HiLink, externalRef: 'https://github.com/lee-stevens', position: 'bottom' }
 ];
 
-export default function SidebarComponent(
-  { handleSidebarStateChange: onChildChange }: { handleSidebarStateChange: (newState: boolean) => void }
-) {
+export default function SidebarComponent() {
   const [showSidebar, setShowSidebar] = useState(false)
   const toggleSidebar = (canToggleSidebar: boolean) => {
     if (canToggleSidebar) {
       const newState = !showSidebar;
       setShowSidebar(newState);
-      onChildChange(newState);
     }
   };
 
@@ -74,7 +71,7 @@ function SidebarItemContent(sidebarTab: SidebarItem, showSidebar: boolean): JSX.
   const IconComponent = sidebarTab.icon;
 
   return (
-    <div>
+    <div className="w-100 h-100">
       <IconComponent size={30} className="sidebar-item__icon" />
       {showSidebar && sidebarTab.name && (
         <div className="sidebar-item__label">{sidebarTab.name}</div>
@@ -88,15 +85,11 @@ function SidebarItemWithAnchor(sidebarTab: SidebarItem, showSidebar: boolean): J
 
   if (sidebarTab.externalRef) {
     return (
-      <div>
-        <a href={sidebarTab.externalRef} target="_blank" className="sidebar-item">{sidebarItemContent}</a>
-      </div>
+      <a href={sidebarTab.externalRef} target="_blank" className="sidebar-item">{sidebarItemContent}</a>
     )
   } else if(sidebarTab.internalRef) {
     return (
-      <div>
-        <Link className="sidebar-item" to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
-      </div>
+      <Link className="sidebar-item" to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
     )
   } else {
     return (<></>)

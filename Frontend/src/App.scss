@@ -36,6 +36,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding-left: 50px; /* Sidebar offset */
 
       &.with-sidebar {
         padding-left: 200px;

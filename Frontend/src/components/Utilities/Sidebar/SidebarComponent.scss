@@ -4,6 +4,13 @@
   flex-direction: column;
   justify-content: space-between;
 
+  .sidebar__expanded {
+    width: var(--sidebar-width__expanded);
+  }
+  .sidebar__collapsed {
+    width: var(--sidebar-width__collapsed);
+  }
+
   .sidebar-item {
     display: flex;
     flex-direction: row;
@@ -20,10 +27,6 @@
     .sidebar-item__label {
       font-size: 1.2em;
       font-weight: 500;
-    }
-
-    .sidebar-item__icon {
-      font-size: 1.5em;
     }
 
     a {
