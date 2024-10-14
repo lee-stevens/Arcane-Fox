@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "build-deploy": "tsc -b && vite build && netlify deploy --prod",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update": "npm install",
+    "outdated": "npm outdated"
   },
   "dependencies": {
     "path": "^0.12.7",
@@ -24,7 +26,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^9.11.1",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
     "sass": "^1.79.5",
