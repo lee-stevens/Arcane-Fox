@@ -1,3 +1,4 @@
+import './MarkdownEditorComponent.scss'
 
 export default function MarkdownEditorComponent() {
   return (

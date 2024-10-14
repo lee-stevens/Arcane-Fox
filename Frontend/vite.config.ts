@@ -4,8 +4,9 @@ import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
+  resolve: { // This must match tsconfig.app.json's alias'
     alias: {
+      "@Routes": `${path.resolve(__dirname, "./src/components/Routes")}`,
       "@Components": `${path.resolve(__dirname, "./src/components")}`,
       "@Types": `${path.resolve(__dirname, "./src/types")}`,
       "@Const": `${path.resolve(__dirname, "./src/const")}`,

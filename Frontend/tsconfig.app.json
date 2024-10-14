@@ -23,6 +23,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
+      "@Routes/*": ["src/components/routes/*"],
       "@Components/*": ["src/components/*"],
       "@Types/*": ["src/types/*"],
       "@Const/*": ["src/const/*"],
