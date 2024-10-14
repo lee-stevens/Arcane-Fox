@@ -1,29 +1,23 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './AppContentComponent.scss'
-import reactLogo from '@Assets/react.svg'
+import DashboardFeatureComponent from './Dashboard/DashboardFeatureComponent'
+import MarkdownFeatureComponent from './Markdown/MarkdownFeatureComponent'
+import UtilitiesComponent from '../Utilities/UtilitiesComponent';
 
-//Conditional JSX via 'Function-based conditional rendering'
-function HeaderLogo(): JSX.Element | undefined {
-  if (reactLogo) {
-    return (
-      <a href="https://github.com/lee-stevens" target="_blank">
-        <img src={reactLogo} className="logo" alt="Logo" />
-      </a>
-    )
-  }
-}
+export type Feature = 'Dashboard' | 'Markdown';
 
 export default function AppContentComponent() {
-  const headerLogo = HeaderLogo()
   return (
-    <>
+    <BrowserRouter>
+      <UtilitiesComponent />
       <div id="app-contents">
-        {headerLogo} { /* Conditional JSX - Only renders if truthy */}
-        <h2>Dashboard</h2>
-        <div className="card">
-        </div>
+        <Routes>
+          <Route path="/" element={<DashboardFeatureComponent />} />
+          <Route path="/dashboard" element={<DashboardFeatureComponent />} />
+          <Route path="/markdown" element={<MarkdownFeatureComponent />} />
+          <Route path="*" element={<DashboardFeatureComponent />} />
+        </Routes>
       </div>
-    </>
+    </BrowserRouter>
   )
 }
-
-

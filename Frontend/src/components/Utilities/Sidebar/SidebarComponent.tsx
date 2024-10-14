@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { SidebarTab, SidebarTabName } from "../../../types/sidebar";
+import { SidebarItem, SidebarItemName } from "../../../types/sidebar";
 import './SidebarComponent.scss';
 import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
 import React from "react";
+import { Link } from "react-router-dom";
 
-const sidebarTabs: SidebarTab[] = [
-  { name: '', icon: HiMenu, canToggleSidebar: true, position: 'top' },
-  { name: 'Dashboard', icon: HiHome, position: 'top' },
-  { name: 'Settings', icon: HiCog, position: 'top' },
-  { name: 'Profile', icon: HiUser, position: 'top' },
-  { name: 'Logout', icon: HiLogout, position: 'top' },
-  { name: 'Github', icon: HiLink, ref: 'https://github.com/lee-stevens', position: 'bottom' }
+const sidebarTabs: SidebarItem[] = [
+  { name: '', icon: HiMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },
+  { name: 'Dashboard', icon: HiHome, internalRef: '/dashboard', position: 'top' },
+  { name: 'Notes', icon: HiHome, internalRef: '/markdown', position: 'top' },
+  { name: 'Settings', icon: HiCog, internalRef: '/settings',position: 'top' },
+  { name: 'Account', icon: HiUser, internalRef: '/account',position: 'top' },
+  { name: 'Logout', icon: HiLogout, internalRef: '/logout',position: 'top' },
+  { name: 'Github', icon: HiLink, externalRef: 'https://github.com/lee-stevens', position: 'bottom' }
 ];
 
 export default function SidebarComponent(
@@ -25,9 +27,10 @@ export default function SidebarComponent(
     }
   };
 
-  const sidebarElementRecord: Partial<Record<SidebarTabName, JSX.Element>> = {};
-  sidebarTabs.forEach((tab: SidebarTab) => {
-    sidebarElementRecord[tab.name] = tab.ref ? SidebarItemWithAnchor(tab, showSidebar) : SidebarItemContent(tab, showSidebar);
+  const sidebarElementRecord: Partial<Record<SidebarItemName, JSX.Element>> = {};
+  sidebarTabs.forEach((tab: SidebarItem) => {
+    sidebarElementRecord[tab.name] = (tab.externalRef || tab.internalRef) ? 
+      SidebarItemWithAnchor(tab, showSidebar) : SidebarItemContent(tab, showSidebar);
   });
 
   const topSidebarItems = sidebarTabs.filter(tab => tab.position === 'top');
@@ -36,7 +39,7 @@ export default function SidebarComponent(
   return (
     <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
       <div id="sidebar__top">
-        {topSidebarItems.map((tab: SidebarTab) => {
+        {topSidebarItems.map((tab: SidebarItem) => {
           const tabElement = sidebarElementRecord[tab.name];
           const canToggleSidebar = tab.canToggleSidebar;
   
@@ -51,10 +54,9 @@ export default function SidebarComponent(
       </div>
   
       <div id="sidebar_bottom">
-        {bottomSidebarItems.map((tab: SidebarTab) => {
+        {bottomSidebarItems.map((tab: SidebarItem) => {
           const tabElement = sidebarElementRecord[tab.name];
           const canToggleSidebar = tab.canToggleSidebar;
-  
           return (
             <React.Fragment key={tab.name}>
               <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
@@ -68,23 +70,36 @@ export default function SidebarComponent(
   );
 }
 
-function SidebarItemContent(sidebarTab: SidebarTab, showSidebar: boolean): JSX.Element {
+function SidebarItemContent(sidebarTab: SidebarItem, showSidebar: boolean): JSX.Element {
   const IconComponent = sidebarTab.icon;
 
   return (
-    <>
+    <div>
       <IconComponent size={30} className="sidebar-item__icon" />
       {showSidebar && sidebarTab.name && (
         <div className="sidebar-item__label">{sidebarTab.name}</div>
       )}
-    </>
+    </div>
   )
 }
 
-function SidebarItemWithAnchor(sidebarTab: SidebarTab, showSidebar: boolean): JSX.Element {
+function SidebarItemWithAnchor(sidebarTab: SidebarItem, showSidebar: boolean): JSX.Element {
   const sidebarItemContent = SidebarItemContent(sidebarTab, showSidebar);
-  return (
-    <a href={sidebarTab.ref} target="_blank" className="sidebar-item">{sidebarItemContent}</a>
-  )
+
+  if (sidebarTab.externalRef) {
+    return (
+      <div>
+        <a href={sidebarTab.externalRef} target="_blank" className="sidebar-item">{sidebarItemContent}</a>
+      </div>
+    )
+  } else if(sidebarTab.internalRef) {
+    return (
+      <div>
+        <Link className="sidebar-item" to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
+      </div>
+    )
+  } else {
+    return (<></>)
+  }
 }
 

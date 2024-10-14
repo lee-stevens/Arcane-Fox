@@ -1,12 +1,13 @@
 import { IconType } from "react-icons";
 
-export type SidebarTabName = '' | 'Dashboard' | 'Settings' | 'Profile' | 'Logout' | 'Github';
+export type SidebarItemName = '' | 'Dashboard' | 'Notes' | 'Settings' | 'Account' | 'Logout' | 'Github';
 export type SidebarItemPosition = 'top' | 'bottom';
 
-export interface SidebarTab {
-  name: SidebarTabName;
+export interface SidebarItem {
+  name: SidebarItemName;
   icon: IconType;
   position: SidebarItemPosition;
   canToggleSidebar?: boolean;
-  ref?: string;
+  internalRef?: string;
+  externalRef?: string;
 }
