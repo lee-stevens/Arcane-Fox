@@ -35,7 +35,7 @@ export default function SidebarComponent() {
   
   return (
     <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
-      <div id="sidebar__top">
+      <div className="sidebar__top">
         {topSidebarItems.map((tab: SidebarItem) => {
           const tabElement = sidebarElementRecord[tab.name];
           const canToggleSidebar = tab.canToggleSidebar;
@@ -50,7 +50,7 @@ export default function SidebarComponent() {
         })}
       </div>
   
-      <div id="sidebar_bottom">
+      <div className="sidebar__bottom">
         {bottomSidebarItems.map((tab: SidebarItem) => {
           const tabElement = sidebarElementRecord[tab.name];
           const canToggleSidebar = tab.canToggleSidebar;
@@ -71,7 +71,7 @@ function SidebarItemContent(sidebarTab: SidebarItem, showSidebar: boolean): JSX.
   const IconComponent = sidebarTab.icon;
 
   return (
-    <div className="w-100 h-100">
+    <div className="sidebar-item__inner-content">
       <IconComponent size={30} className="sidebar-item__icon" />
       {showSidebar && sidebarTab.name && (
         <div className="sidebar-item__label">{sidebarTab.name}</div>
@@ -85,11 +85,11 @@ function SidebarItemWithAnchor(sidebarTab: SidebarItem, showSidebar: boolean): J
 
   if (sidebarTab.externalRef) {
     return (
-      <a href={sidebarTab.externalRef} target="_blank" className="sidebar-item">{sidebarItemContent}</a>
+      <a href={sidebarTab.externalRef} target="_blank">{sidebarItemContent}</a>
     )
   } else if(sidebarTab.internalRef) {
     return (
-      <Link className="sidebar-item" to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
+      <Link to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
     )
   } else {
     return (<></>)
