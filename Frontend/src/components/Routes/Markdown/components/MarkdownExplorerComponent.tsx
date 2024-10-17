@@ -10,7 +10,7 @@ export default function MarkdownExplorerComponent() {
 
   return (
     <div id="markdown-explorer">
-      <h2>Markdown Explorer</h2>
+      <h2>Explorer</h2>
       <div className="markdown-row-container">
         <React.Fragment>
           {markdownRowElements}
@@ -28,7 +28,7 @@ function GetMarkdownDocuments() {
 function CreateMarkdownRowElement(markdownDocument: IMarkdownDocument): JSX.Element {
   return (
     <div className="markdown-row" key={markdownDocument.id}>
-      <Link to={'/'}>
+      <Link to={'/markdown'}>
         <div className="markdown-row-title">{markdownDocument.title}</div>
       </Link>
     </div>

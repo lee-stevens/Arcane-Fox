@@ -1,134 +1,91 @@
-import { useState } from "react";
 import './SidebarComponent.scss';
 import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
 import React from "react";
 import { Link } from "react-router-dom";
-import { SidebarItem, SidebarItemName } from "@Types/utilities";
+import { ISidebarItem, SidebarItemPosition } from "@Types/utilities";
 
-const sidebarTabs: SidebarItem[] = [
+const sidebarItems: ISidebarItem[] = [
   { name: '', icon: HiMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },
-  { name: 'Dashboard', icon: HiHome, internalRef: '/dashboard', position: 'top' },
-  { name: 'Notes', icon: HiHome, internalRef: '/markdown', position: 'top' },
-  { name: 'Settings', icon: HiCog, internalRef: '/settings',position: 'top' },
-  { name: 'Account', icon: HiUser, internalRef: '/account',position: 'top' },
-  { name: 'Logout', icon: HiLogout, internalRef: '/logout',position: 'top' },
-  { name: 'Github', icon: HiLink, externalRef: 'https://github.com/lee-stevens', position: 'bottom' }
+  { name: 'Dashboard', icon: HiHome, internalRef: '/dashboard', position: 'top', canToggleSidebar: false },
+  { name: 'Notes', icon: HiHome, internalRef: '/markdown', position: 'top', canToggleSidebar: false },
+  { name: 'Settings', icon: HiCog, internalRef: '/settings',position: 'top', canToggleSidebar: false },
+  { name: 'Account', icon: HiUser, internalRef: '/account',position: 'top', canToggleSidebar: false },
+  { name: 'Logout', icon: HiLogout, internalRef: '/logout',position: 'top', canToggleSidebar: false },
+  { name: 'Github', icon: HiLink, externalRef: 'https://github.com/lee-stevens', position: 'bottom', canToggleSidebar: false }
 ];
 
-export default function SidebarComponent() {
-  const [showSidebar, setShowSidebar] = useState(false)
-  const toggleSidebar = (canToggleSidebar: boolean) => {
+/* EXAMPLE: How to pass several parameters into a Component including functions */
+export default function SidebarComponent(
+  { sidebarState, sidebarStateEvent }: 
+  { 
+    sidebarState: boolean, 
+    sidebarStateEvent: () => void 
+  }
+) {
+  const changeSidebarStateFN = (canToggleSidebar: boolean) => {
     if (canToggleSidebar) {
-      const newState = !showSidebar;
-      setShowSidebar(newState);
+      sidebarStateEvent();
     }
-  };
+  }
 
-  const sidebarElementRecord: Partial<Record<SidebarItemName, JSX.Element>> = {};
-  sidebarTabs.forEach((tab: SidebarItem) => {
-    sidebarElementRecord[tab.name] = (tab.externalRef || tab.internalRef) ? 
-      SidebarItemWithAnchor(tab, showSidebar) : SidebarItemContent(tab, showSidebar);
+  const sidebarItemElementRecord: Record<SidebarItemPosition, JSX.Element[]> = { top: [], bottom: []};
+  sidebarItems.forEach((item: ISidebarItem) => {
+    sidebarItemElementRecord[item.position].push(CreateSidebarItem(item, sidebarState, changeSidebarStateFN));
   });
 
-  const topSidebarItems = sidebarTabs.filter(tab => tab.position === 'top');
-  const bottomSidebarItems = sidebarTabs.filter(tab => tab.position === 'bottom');
-  
   return (
-    <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
+    <div id="app-utilities__sidebar" className={sidebarState ? '--expanded' : '--collapsed'}>
       <div className="sidebar__top">
-        {topSidebarItems.map((tab: SidebarItem) => {
-          const tabElement = sidebarElementRecord[tab.name];
-          const canToggleSidebar = tab.canToggleSidebar;
-  
-          return (
-            <React.Fragment key={tab.name}>
-              <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
-                {tabElement}
-              </div>
-            </React.Fragment>
-          );
-        })}
+        {sidebarItemElementRecord['top']}
       </div>
-  
       <div className="sidebar__bottom">
-        {bottomSidebarItems.map((tab: SidebarItem) => {
-          const tabElement = sidebarElementRecord[tab.name];
-          const canToggleSidebar = tab.canToggleSidebar;
-          return (
-            <React.Fragment key={tab.name}>
-              <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
-                {tabElement}
-              </div>
-            </React.Fragment>
-          );
-        })}
+        {sidebarItemElementRecord['bottom']}
       </div>
     </div>
   );
 }
 
-function RenderSidebarItem(): JSX.Element {
+function CreateSidebarItem(
+  sidebarItem: ISidebarItem, 
+  sidebarState: boolean, 
+  toggleSidebar: (canToggelSidebar: boolean) => void
+): JSX.Element {
+  const sidebarItemContent = CreateSidebarItemWithAnchors(sidebarItem, sidebarState);
 
+  return (
+    <React.Fragment key={sidebarItem.name}>
+      <div className="sidebar-item" onClick={() => toggleSidebar(sidebarItem.canToggleSidebar)}>
+        { sidebarItemContent }
+      </div>
+    </React.Fragment>
+  )
 }
 
-function SidebarItemContent(sidebarTab: SidebarItem, showSidebar: boolean): JSX.Element {
-  const IconComponent = sidebarTab.icon;
+function CreateSidebarItemWithAnchors(sidebarItem: ISidebarItem, sidebarState: boolean): JSX.Element {
+  const sidebarItemContent = CreateSidebarItemContent(sidebarItem, sidebarState);
+
+  if (sidebarItem.externalRef) {
+    return (
+      <a href={sidebarItem.externalRef} target="_blank">{sidebarItemContent}</a>
+    )
+  } else if(sidebarItem.internalRef) {
+    return (
+      <Link to={sidebarItem.internalRef}>{sidebarItemContent}</Link>
+    )
+  } else {
+    return sidebarItemContent;
+  }
+}
+
+function CreateSidebarItemContent(sidebarItem: ISidebarItem, sidebarState: boolean): JSX.Element {
+  const IconComponent = sidebarItem.icon;
 
   return (
     <div className="sidebar-item__inner-content">
       <IconComponent size={30} className="sidebar-item__icon" />
-      {showSidebar && sidebarTab.name && (
-        <div className="sidebar-item__label">{sidebarTab.name}</div>
+      {sidebarState && sidebarItem.name && (
+        <div className="sidebar-item__label">{sidebarItem.name}</div>
       )}
     </div>
   )
 }
-
-function SidebarItemWithAnchor(sidebarTab: SidebarItem, showSidebar: boolean): JSX.Element {
-  const sidebarItemContent = SidebarItemContent(sidebarTab, showSidebar);
-
-  if (sidebarTab.externalRef) {
-    return (
-      <a href={sidebarTab.externalRef} target="_blank">{sidebarItemContent}</a>
-    )
-  } else if(sidebarTab.internalRef) {
-    return (
-      <Link to={sidebarTab.internalRef}>{sidebarItemContent}</Link>
-    )
-  } else {
-    return (<></>)
-  }
-}
-
-
-
-// Refactor using this snippet:
-
-// const renderSidebarItems = (items: SidebarItem[]) => {
-//   return items.map((tab) => {
-//     const tabElement = sidebarElementRecord[tab.name];
-//     const canToggleSidebar = tab.canToggleSidebar;
-    
-//     return (
-//       <React.Fragment key={tab.name}>
-//         <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
-//           {tabElement}
-//         </div>
-//       </React.Fragment>
-//     );
-//   });
-// };
-
-// const topSidebarItems = sidebarTabs.filter(tab => tab.position === 'top');
-// const bottomSidebarItems = sidebarTabs.filter(tab => tab.position === 'bottom');
-
-// return (
-//   <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
-//     <div className="sidebar__top">
-//       {renderSidebarItems(topSidebarItems)}
-//     </div>
-//     <div className="sidebar__bottom">
-//       {renderSidebarItems(bottomSidebarItems)}
-//     </div>
-//   </div>
-// );
