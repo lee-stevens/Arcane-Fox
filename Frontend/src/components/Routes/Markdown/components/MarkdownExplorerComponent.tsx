@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import './MarkdownExplorerComponent.scss';
 import { MARKDOWN_DOCUMENTS_HARDCODED } from "@Const/markdown";
 import { IMarkdownDocument } from "@Types/markdown";
+import { FaFolderTree } from "react-icons/fa6";
+import HeaderWithIconComponent from "../../../Shared/HeaderWithIconComponent";
 
 export default function MarkdownExplorerComponent() {
   const documents = GetMarkdownDocuments();
@@ -10,11 +12,9 @@ export default function MarkdownExplorerComponent() {
 
   return (
     <div id="markdown-explorer">
-      <h2>Explorer</h2>
+      <HeaderWithIconComponent IconComponent={FaFolderTree} title={'Explorer'} />
       <div className="markdown-row-container">
-        <React.Fragment>
-          {markdownRowElements}
-        </React.Fragment>
+        {markdownRowElements}
       </div>
     </div>
   )
@@ -27,10 +27,12 @@ function GetMarkdownDocuments() {
 
 function CreateMarkdownRowElement(markdownDocument: IMarkdownDocument): JSX.Element {
   return (
-    <div className="markdown-row" key={markdownDocument.id}>
-      <Link to={'/markdown'}>
-        <div className="markdown-row-title">{markdownDocument.title}</div>
-      </Link>
-    </div>
+    <React.Fragment key={markdownDocument.id}>
+      <div className="markdown-row" key={markdownDocument.id}>
+        <Link to={'/markdown'}>
+          <div className="markdown-row-title">{markdownDocument.title}</div>
+        </Link>
+      </div>
+    </React.Fragment>
   )
 }

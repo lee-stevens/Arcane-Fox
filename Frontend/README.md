@@ -19,11 +19,12 @@
 
 ## Hosting
 
-[Heroku]
+[Netlify](https://app.netlify.com/sites/arcane-fox/overview)
+[Heroku](https://www.heroku.com/)
 
 ## React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup to get React working in Vite with Hot Module Replacement (HMR) and some ESLint rules.
 
 ## Key Notes
 
@@ -48,3 +49,4 @@ This template provides a minimal setup to get React working in Vite with HMR and
 9. Always destructure props
 10. Pascal for Components, camelCase for functions and variables
 11. Use `useMemo` to apply memoization to something so it only recomputes when the explicit dependencies are changed
+c

@@ -1,17 +1,25 @@
 import './SidebarComponent.scss';
-import { HiHome, HiCog, HiUser, HiLogout, HiMenu, HiLink } from 'react-icons/hi';
+import { VscAccount, VscGithub, VscHome, VscMarkdown, VscMenu, VscSettingsGear, VscSignOut } from "react-icons/vsc";
 import React from "react";
 import { Link } from "react-router-dom";
 import { ISidebarItem, SidebarItemPosition } from "@Types/utilities";
+import { FaCss3, FaReact, FaSass } from 'react-icons/fa6';
+import { SiVite } from 'react-icons/si';
+import { RiTailwindCssFill } from 'react-icons/ri';
 
 const sidebarItems: ISidebarItem[] = [
-  { name: '', icon: HiMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },
-  { name: 'Dashboard', icon: HiHome, internalRef: '/dashboard', position: 'top', canToggleSidebar: false },
-  { name: 'Notes', icon: HiHome, internalRef: '/markdown', position: 'top', canToggleSidebar: false },
-  { name: 'Settings', icon: HiCog, internalRef: '/settings',position: 'top', canToggleSidebar: false },
-  { name: 'Account', icon: HiUser, internalRef: '/account',position: 'top', canToggleSidebar: false },
-  { name: 'Logout', icon: HiLogout, internalRef: '/logout',position: 'top', canToggleSidebar: false },
-  { name: 'Github', icon: HiLink, externalRef: 'https://github.com/lee-stevens', position: 'bottom', canToggleSidebar: false }
+  { name: '', icon: VscMenu, canToggleSidebar: true, internalRef: '/', position: 'top' },
+  { name: 'Dashboard', icon: VscHome, internalRef: '/dashboard', position: 'top', canToggleSidebar: false },
+  { name: 'Notes', icon: VscMarkdown, internalRef: '/markdown', position: 'top', canToggleSidebar: false },
+  { name: 'Settings', icon: VscSettingsGear, internalRef: '/settings',position: 'top', canToggleSidebar: false },
+  { name: 'Account', icon: VscAccount, internalRef: '/account',position: 'top', canToggleSidebar: false },
+  { name: 'Logout', icon: VscSignOut, internalRef: '/logout',position: 'top', canToggleSidebar: false },
+  { name: 'React', icon: FaReact, externalRef: 'https://react.dev/reference/react', position: 'bottom', canToggleSidebar: false },
+  { name: 'Vite', icon: SiVite, externalRef: 'https://vite.dev/guide/features', position: 'bottom', canToggleSidebar: false },
+  { name: 'SASS', icon: FaSass, externalRef: 'https://sass-lang.com/documentation/', position: 'bottom', canToggleSidebar: false },
+  { name: 'Tailwind', icon: RiTailwindCssFill, externalRef: 'https://tailwind.build/classes', position: 'bottom', canToggleSidebar: false },
+  { name: 'CSS', icon: FaCss3, externalRef: 'https://developer.mozilla.org/en-US/docs/Web/CSS', position: 'bottom', canToggleSidebar: false },
+  { name: 'Github', icon: VscGithub, externalRef: 'https://github.com/lee-stevens', position: 'bottom', canToggleSidebar: false }
 ];
 
 /* EXAMPLE: How to pass several parameters into a Component including functions */

@@ -1,0 +1,20 @@
+#markdown-searchbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 20px;
+  display: flex;
+  width: 80%;
+  height: 20px;
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 25px;
+    padding: 0.3em 1em;
+    text-align: center;
+  }
+}

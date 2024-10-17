@@ -1,25 +1,25 @@
 #root {
-  height: 100%;
-  max-width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   text-align: center;
+  /* TODO: This is a temporary hack, preferably the app shouldn't have scrolling with the next two lines removed */
+  // overflow-y: hidden;
+  // overflow-x: hidden;
 
   #app-wrapper {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
 
     #app-utilities {
       position: absolute;
 
       #app-utilities__sidebar {
-        background-color: var(--secondary-color);
-
         &.--expanded {
           width: 200px;
         }
@@ -30,12 +30,11 @@
     }
 
     #app-contents {
-      width: 100vw;
-      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      width: 100%;
       padding-left: 50px; /* Sidebar offset */
 
       &.with-sidebar {

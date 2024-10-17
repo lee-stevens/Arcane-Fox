@@ -4,8 +4,17 @@ import MarkdownFeatureComponent from '@Components/Routes/Markdown/MarkdownFeatur
 import UtilitiesComponent from '@Components/Utilities/UtilitiesComponent';
 import './App.scss'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { keybindService } from '@Services/Keybinds';
 
 export default function App() {
+  useEffect(() => {
+
+    keybindService.init();
+
+    return () => keybindService.destroy();
+  }, []);
+
   return (
     <div id="app-wrapper">
     <BrowserRouter>

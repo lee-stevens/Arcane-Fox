@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 
-export type SidebarItemName = '' | 'Dashboard' | 'Notes' | 'Settings' | 'Account' | 'Logout' | 'Github';
+export type SidebarItemName = '' | 'Dashboard' | 'Notes' | 'Settings' | 'Account' | 'Logout' | 'Vite' | 'React' | 'SASS' | 'Tailwind' | 'CSS' | 'Github';
 export type SidebarItemPosition = 'top' | 'bottom';
 
 export interface ISidebarItem {
