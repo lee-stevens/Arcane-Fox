@@ -67,6 +67,10 @@ export default function SidebarComponent() {
   );
 }
 
+function RenderSidebarItem(): JSX.Element {
+
+}
+
 function SidebarItemContent(sidebarTab: SidebarItem, showSidebar: boolean): JSX.Element {
   const IconComponent = sidebarTab.icon;
 
@@ -96,3 +100,35 @@ function SidebarItemWithAnchor(sidebarTab: SidebarItem, showSidebar: boolean): J
   }
 }
 
+
+
+// Refactor using this snippet:
+
+// const renderSidebarItems = (items: SidebarItem[]) => {
+//   return items.map((tab) => {
+//     const tabElement = sidebarElementRecord[tab.name];
+//     const canToggleSidebar = tab.canToggleSidebar;
+    
+//     return (
+//       <React.Fragment key={tab.name}>
+//         <div className="sidebar-item" onClick={() => toggleSidebar(!!canToggleSidebar)}>
+//           {tabElement}
+//         </div>
+//       </React.Fragment>
+//     );
+//   });
+// };
+
+// const topSidebarItems = sidebarTabs.filter(tab => tab.position === 'top');
+// const bottomSidebarItems = sidebarTabs.filter(tab => tab.position === 'bottom');
+
+// return (
+//   <div id="app-utilities__sidebar" className={showSidebar ? '--expanded' : '--collapsed'}>
+//     <div className="sidebar__top">
+//       {renderSidebarItems(topSidebarItems)}
+//     </div>
+//     <div className="sidebar__bottom">
+//       {renderSidebarItems(bottomSidebarItems)}
+//     </div>
+//   </div>
+// );
