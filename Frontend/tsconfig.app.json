@@ -10,6 +10,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "noImplicitAny": false, /* Has to be disabled because of window events */
     "jsx": "react-jsx",
     /* Linting */
     "strict": true,
