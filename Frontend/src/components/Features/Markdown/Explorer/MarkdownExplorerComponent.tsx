@@ -11,7 +11,7 @@ export default function MarkdownExplorerComponent() {
   const markdownRowElements = documents.map((document) => CreateMarkdownRowElement(document));
 
   return (
-    <div id="markdown-explorer">
+    <div id="markdown-explorer-view">
       <HeaderWithIconComponent IconComponent={FaFolderTree} title={'Explorer'} />
       <div className="markdown-row-container">
         {markdownRowElements}
