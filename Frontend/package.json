@@ -10,14 +10,17 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "update": "npm install",
-    "outdated": "npm outdated"
+    "outdated": "npm outdated",
+    "docker-build": "docker compose up --build",
+    "start": "serve -s dist"
   },
   "dependencies": {
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
-    "react-router-dom": "^6.27.0"
+    "react-router-dom": "^6.27.0",
+    "serve": "^14.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

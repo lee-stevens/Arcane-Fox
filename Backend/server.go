@@ -29,8 +29,8 @@ func main() {
 	router.HandleFunc("/users", createUser).Methods("POST")
 
 	// Adding log statement to indicate that the server is listening
-	log.Println("Server listening at 'http://localhost:8080/'")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Println("Server listening at 'http://localhost:3006/'")
+	log.Fatal(http.ListenAndServe(":3006", router))
 }
 
 func getHome(w http.ResponseWriter, r *http.Request) {
