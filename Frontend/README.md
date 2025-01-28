@@ -49,3 +49,6 @@ This template provides a minimal setup to get React working in Vite with Hot Mod
 9. Always destructure props
 10. Pascal for Components, camelCase for functions and variables
 11. Use `useMemo` to apply memoization to something so it only recomputes when the explicit dependencies are changed
+12. The component heirarchy is Routes --> Route/Feature --> views & components
+13. A Feature is a major aspect of the application, features are made up of views and components
+14. Views are individual containers for logic within a feature
